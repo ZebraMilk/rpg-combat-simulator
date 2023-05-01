@@ -8,7 +8,7 @@
   <script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
   <body>
     <header>
-      <h1>Combat Stimulator</h1>
+      <h1>Combat Simulator</h1>
     </header>
     <main class="battlefield">
       <div class="player player-1">
@@ -39,9 +39,9 @@
           </tbody>
         </table>
       </div>
-      <div class="actions">
-        <div class="damage-display"></div>
-      </div>
+      <section class="actions">
+        <div class="damage-display"><p>Player 1 deals 30 damage!</p></div>
+      </section>
       <div class="player player-2">
         <h2 class="player-name"></h2>
         <table class="character-stats">
@@ -71,6 +71,13 @@
         <img src="#" alt="Dimetriux" class="character-img" />
       </div>
     </main>
-    <div class="console">Hello</div>
+    <div class="console">
+      <button class="attack-btn player-1" type="button">
+        Attack with Player 1
+      </button>
+      <button class="attack-btn player-2" type="button">
+        Attack with Player 2
+      </button>
+    </div>
   </body>
 </html>
