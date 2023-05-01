@@ -371,7 +371,7 @@ h2 {
 *,
 *::before,
 *::after {
-  border: 2px solid green;
+  /* border: 2px solid green; */
   box-sizing: border-box;
 }
 
@@ -403,6 +403,8 @@ main {
   max-height: 100%;
   display: grid;
   grid-template-rows: 3rem 1fr;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 .player-1 {
   grid-template-columns: 60% 1fr;
@@ -421,12 +423,27 @@ main {
 
 /* || components */
 
-.character-stats table {
+table {
   max-height: 100%;
+  border-spacing: 0;
   border-collapse: collapse;
 }
 
 td {
+  margin: 0;
+  border: 1px solid whitesmoke;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.damage-display p {
   text-align: center;
 }
 
