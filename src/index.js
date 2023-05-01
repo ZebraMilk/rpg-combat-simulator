@@ -1,96 +1,75 @@
 // Main entry point for various files
 import './style.css';
+
+// source the images correctly after webpack does its thing
 import marisela from './assets/images/01-marisela.jpeg';
 import dimetriux from './assets/images/06-dimetriux.jpg';
 
-// get the dice logic API
-import roll from './dice-logic';
-
-// source the images correctly after webpack does its thing
 const playerOneImage = document.querySelector('.player-1>img');
 playerOneImage.src = marisela;
 
 const playerTwoImage = document.querySelector('.player-2>img');
 playerTwoImage.src = dimetriux;
 
+import characters from './characters';
+const playerOne = characters.playerOne;
+const playerTwo = characters.playerTwo;
+
+// populate initial display
+characters.playerOne.displayStats();
+characters.playerTwo.displayStats();
+
+// get the dice logic API
+import rolls from './dice-logic';
+
 console.log('Page Loaded!');
 
-// Grab field arrays
-const playerNameFields = document.querySelectorAll('.player-name');
-const armorClassFields = document.querySelectorAll('.armor-class');
-const hitPointsFields = document.querySelectorAll('.hit-points');
-const weaponFields = document.querySelectorAll('.weapon');
-const damageFields = document.querySelectorAll('.damage');
-const speedFields = document.querySelectorAll('.speed');
-// make new player objects
-
-// make a factory function for the characters
-const makePlayer = (
-  id,
-  playerName,
-  armorClass,
-  currentHitPoints,
-  maxHitPoints,
-  weapon,
-  damage,
-  speed
-) => {
-  const playerObj = {
-    id,
-    // have each player property associated with the value and the corresponding display field
-    playerName: [playerName, playerNameFields[id]],
-    armorClass: [armorClass, armorClassFields[id]],
-    hitPoints: [currentHitPoints, maxHitPoints, hitPointsFields[id]],
-    weapon: [weapon, weaponFields[id]],
-    damage: [damage, damageFields[id]],
-    speed: [speed, speedFields[id]],
-    // methods
-    takeDamage(damage) {
-      this.hitPoints[0] = this.hitPoints[0] - damage;
-      if (this.hitPoints[0] <= 0) {
-        this.death();
-      }
-      this.displayStats();
-    },
-    heal() {
-      this.hitPointes.currentHitPoints = this.maxHitPoints;
-      this.displayStats();
-    },
-    displayStats() {
-      this.playerName[1].textContent = this.playerName[0];
-      this.armorClass[1].textContent = this.armorClass[0];
-      this.hitPoints[2].textContent = `${this.hitPoints[0]} / ${this.hitPoints[1]}`;
-      this.weapon[1].textContent = this.weapon[0];
-      this.damage[1].textContent = this.damage[0];
-      this.speed[1].textContent = this.speed[0];
-    },
-    death() {},
-  };
-  return playerObj;
+const toHit = (roll, armor) => {
+  console.log(roll, armor);
+  if (roll >= armor) {
+    console.log('HIT!');
+  } else {
+    console.log('Miss...');
+  }
 };
 
-const playerOne = makePlayer(
-  0,
-  'Marisela',
-  18,
-  50,
-  50,
-  'Dagger of holding',
-  6,
-  10
-);
+// bring the rollToHit functions into this file to better learn callback Hell
+const rollToHit = () => {
+  const rollTotal = rolls('1d20');
+  console.log(rollTotal);
+  return rollTotal;
+};
 
-const playerTwo = makePlayer(
-  1,
-  'Dimetriux',
-  15,
-  40,
-  40,
-  'Fingernails of Some Description',
-  15,
-  20
-);
+const rollToHitAdvantage = () => {
+  const rollTotal = rolls('2d20kh1');
+  console.log(rollTotal);
+  return rollTotal;
+};
 
-playerOne.displayStats();
-playerTwo.displayStats();
-roll();
+const clickHandler = (e) => {
+  const attackType = e.target.classList;
+  let rollTotal;
+  // Check button type for player and advantage
+  if (attackType.contains('player-1')) {
+    // get a dice roll, takes 2s
+    if (attackType.contains('advantage')) {
+      rollTotal = rollToHitAdvantage();
+    } else {
+      rollTotal = rollToHit();
+    }
+    // THAC0!!!
+    // passing in rollTotal which is undefined at the moment
+    // so let's pass toHit into rollToHit and call it there
+    toHit(rollTotal, playerTwo.armorClass[0]);
+  } else if (attackType.contains('player-2')) {
+    if (attackType.contains('advantage')) {
+      playerTwo.rollToHitAdvantage();
+      return;
+    }
+    playerTwo.rollToHit();
+  } else console.log('something else...');
+};
+// listen to each button?
+// OR listen to the console and check the class of the button that's clicked
+const buttonConsole = document.querySelector('.console');
+buttonConsole.addEventListener('click', clickHandler);
