@@ -1,6 +1,4 @@
-// Move the character creation and stats stuff from index to here
-
-// Grab field arrays
+// Grab field arrays, should be 2 of each from ./template.html
 const playerNameFields = document.querySelectorAll('.player-name');
 const armorClassFields = document.querySelectorAll('.armor-class');
 const hitPointsFields = document.querySelectorAll('.hit-points');
@@ -49,7 +47,14 @@ const makePlayer = (
       this.speed[1].textContent = this.speed[0];
     },
     death() {},
-    rollToHit() {},
+    rollToHit() {
+      console.log(`Player ${id + 1} Attack!`);
+      // return rollTotal;
+    },
+    rollToHitAdvantage() {
+      console.log(`Player ${id + 1} Attack with Advantage!!!`);
+      // return rollTotal;
+    },
     rollDamage() {},
   };
   // Definitely can return just the methods, the "get/set" stuff, rather than the whole thing
@@ -64,7 +69,7 @@ const playerOne = makePlayer(
   50,
   50,
   'Dagger of holding',
-  6,
+  '2d6',
   10
 );
 
@@ -75,7 +80,7 @@ const playerTwo = makePlayer(
   40,
   40,
   'Fingernails of Some Description',
-  15,
+  '3d8',
   20
 );
 
