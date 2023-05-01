@@ -1,9 +1,14 @@
-import * as rpgDiceRoller from '@dice-roller/rpg-dice-roller';
+import { DiceRoll, DiceRoller } from '@dice-roller/rpg-dice-roller';
 
-const roll = () => {
+const roller = new DiceRoller();
+
+const rollLogic = (dice) => {
   console.log('ROLLLLL');
+  const rollResult = roller.roll(dice);
+  console.log(rollResult.total);
+  return rollResult.total;
 };
 
 // start a roll
 
-export default roll;
+export default rollLogic;

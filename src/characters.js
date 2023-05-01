@@ -49,6 +49,8 @@ const makePlayer = (
       this.speed[1].textContent = this.speed[0];
     },
     death() {},
+    rollToHit() {},
+    rollDamage() {},
   };
   // Definitely can return just the methods, the "get/set" stuff, rather than the whole thing
   return playerObj;

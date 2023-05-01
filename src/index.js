@@ -22,6 +22,7 @@ characters.playerTwo.displayStats();
 console.log('Page Loaded!');
 
 // listen to each button?
-// OR listen to the console and check the class of each button 3
+// OR listen to the console and check the class of the button that's clicked
 
-roll();
+roll('1d20');
+roll('2d20kh1');
