@@ -2,13 +2,20 @@ import { DiceRoll, DiceRoller } from '@dice-roller/rpg-dice-roller';
 
 const roller = new DiceRoller();
 
-const rollLogic = (dice) => {
-  console.log('ROLLLLL');
-  const rollResult = roller.roll(dice);
-  console.log(rollResult.total);
-  return rollResult.total;
+const rolls = (dice) => {
+  console.log('Roll Start...');
+  const rollResult = () => {
+    const rollTotal = roller.roll(dice);
+    console.log(rollTotal.output);
+    return rollTotal;
+  };
+  // log the roll result after 2 seconds
+  setTimeout(() => {
+    console.log('Roll complete!');
+    return rollResult();
+  }, 2000);
 };
 
 // start a roll
 
-export default rollLogic;
+export default rolls;

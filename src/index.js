@@ -11,8 +11,6 @@ playerOneImage.src = marisela;
 const playerTwoImage = document.querySelector('.player-2>img');
 playerTwoImage.src = dimetriux;
 
-// get the dice logic API
-import roll from './dice-logic';
 import characters from './characters';
 const playerOne = characters.playerOne;
 const playerTwo = characters.playerTwo;
@@ -21,18 +19,48 @@ const playerTwo = characters.playerTwo;
 characters.playerOne.displayStats();
 characters.playerTwo.displayStats();
 
+// get the dice logic API
+import rolls from './dice-logic';
+
 console.log('Page Loaded!');
+
+const toHit = (roll, armor) => {
+  console.log(roll, armor);
+  if (roll >= armor) {
+    console.log('HIT!');
+  } else {
+    console.log('Miss...');
+  }
+};
+
+// bring the rollToHit functions into this file to better learn callback Hell
+const rollToHit = () => {
+  const rollTotal = rolls('1d20');
+  console.log(rollTotal);
+  return rollTotal;
+};
+
+const rollToHitAdvantage = () => {
+  const rollTotal = rolls('2d20kh1');
+  console.log(rollTotal);
+  return rollTotal;
+};
 
 const clickHandler = (e) => {
   const attackType = e.target.classList;
-
+  let rollTotal;
   // Check button type for player and advantage
   if (attackType.contains('player-1')) {
+    // get a dice roll, takes 2s
     if (attackType.contains('advantage')) {
-      playerOne.rollToHitAdvantage();
-      return;
+      rollTotal = rollToHitAdvantage();
+    } else {
+      rollTotal = rollToHit();
     }
-    playerOne.rollToHit();
+    // THAC0!!!
+    // passing in rollTotal which is undefined at the moment
+    // so let's pass toHit into rollToHit and call it there
+    toHit(rollTotal, playerTwo.armorClass[0]);
   } else if (attackType.contains('player-2')) {
     if (attackType.contains('advantage')) {
       playerTwo.rollToHitAdvantage();
@@ -45,6 +73,3 @@ const clickHandler = (e) => {
 // OR listen to the console and check the class of the button that's clicked
 const buttonConsole = document.querySelector('.console');
 buttonConsole.addEventListener('click', clickHandler);
-
-roll('1d20');
-roll('2d20kh1');

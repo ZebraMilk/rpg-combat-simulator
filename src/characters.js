@@ -6,6 +6,9 @@ const weaponFields = document.querySelectorAll('.weapon');
 const damageFields = document.querySelectorAll('.damage');
 const speedFields = document.querySelectorAll('.speed');
 
+// get the dice logic API
+import rolls from './dice-logic';
+
 // make a factory function for the characters
 const makePlayer = (
   id,
@@ -49,11 +52,13 @@ const makePlayer = (
     death() {},
     rollToHit() {
       console.log(`Player ${id + 1} Attack!`);
-      // return rollTotal;
+      const rollTotal = rolls('1d20');
+      return rollTotal;
     },
     rollToHitAdvantage() {
       console.log(`Player ${id + 1} Attack with Advantage!!!`);
-      // return rollTotal;
+      const rollTotal = rolls('2d20kh1');
+      return rollTotal;
     },
     rollDamage() {},
   };
