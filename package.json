@@ -25,5 +25,8 @@
     "webpack": "^5.81.0",
     "webpack-cli": "^5.0.2",
     "webpack-dev-server": "^4.13.3"
+  },
+  "dependencies": {
+    "@dice-roller/rpg-dice-roller": "^5.2.1"
   }
 }

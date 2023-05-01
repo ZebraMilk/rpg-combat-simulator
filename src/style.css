@@ -430,6 +430,17 @@ td {
   text-align: center;
 }
 
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.damage-display p {
+  text-align: center;
+}
+
 /* || header and footer */
 
 h1 {
