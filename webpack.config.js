@@ -1,7 +1,15 @@
 const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
+
+  watchOptions: {
+    ignored: '/node_modules/',
+    aggregateTimeout: 1000,
+    poll: 1000,
+  },
+
   entry: {
     // main: path.resolve(__dirname, 'src/promise.js'),
     // main: path.resolve(__dirname, 'src/await.js'),
@@ -13,9 +21,28 @@ module.exports = {
     clean: true,
   },
 
+  // source mapping
+  devtool: 'inline-source-map',
+
+  // server for development
+  devServer: {
+    static: path.resolve(__dirname, 'dist'),
+    hot: true,
+    open: {
+      app: {
+        name: 'google-chrome',
+        arguments: ['--incognito', '--new-window'],
+      },
+    },
+  },
+
+  optimization: {
+    runtimeChunk: 'single',
+  },
+
   // plugins
   plugins: [
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/template.html'),
       title: 'Combat Stimulator',
       filename: 'index.html',
