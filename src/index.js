@@ -3,6 +3,9 @@ import './style.css';
 import marisela from './assets/images/01-marisela.jpeg';
 import dimetriux from './assets/images/06-dimetriux.jpg';
 
+// get the dice logic API
+import roll from './dice-logic';
+
 // source the images correctly after webpack does its thing
 const playerOneImage = document.querySelector('.player-1>img');
 playerOneImage.src = marisela;
@@ -90,3 +93,4 @@ const playerTwo = makePlayer(
 
 playerOne.displayStats();
 playerTwo.displayStats();
+roll();
