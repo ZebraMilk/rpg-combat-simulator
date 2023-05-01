@@ -1,10 +1,12 @@
 // Main entry point for various files
 import './style.css';
-import marisela from './assets/images/01-marisela.jpeg';
-import dimetriux from './assets/images/06-dimetriux.jpg';
 
 // get the dice logic API
 import roll from './dice-logic';
+
+// load image sources
+import marisela from './assets/images/01-marisela.jpeg';
+import dimetriux from './assets/images/06-dimetriux.jpg';
 
 // source the images correctly after webpack does its thing
 const playerOneImage = document.querySelector('.player-1>img');
@@ -13,8 +15,6 @@ playerOneImage.src = marisela;
 const playerTwoImage = document.querySelector('.player-2>img');
 playerTwoImage.src = dimetriux;
 
-console.log('Page Loaded!');
-
 // Grab field arrays
 const playerNameFields = document.querySelectorAll('.player-name');
 const armorClassFields = document.querySelectorAll('.armor-class');
@@ -22,7 +22,8 @@ const hitPointsFields = document.querySelectorAll('.hit-points');
 const weaponFields = document.querySelectorAll('.weapon');
 const damageFields = document.querySelectorAll('.damage');
 const speedFields = document.querySelectorAll('.speed');
-// make new player objects
+
+console.log('Page Loaded!');
 
 // make a factory function for the characters
 const makePlayer = (
@@ -69,6 +70,10 @@ const makePlayer = (
   return playerObj;
 };
 
+// listen to each button?
+// OR listen to the console and check the class of each button 3
+
+// make two players
 const playerOne = makePlayer(
   0,
   'Marisela',
@@ -91,6 +96,7 @@ const playerTwo = makePlayer(
   20
 );
 
+// populate initial display
 playerOne.displayStats();
 playerTwo.displayStats();
 roll();
