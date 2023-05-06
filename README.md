@@ -11,3 +11,7 @@ I have 3 goals for this:
 3. Convert all the logic to use `async function` and `await`
 
 The UI is pretty basic, loaded in a couple of character avatars and gave them random statistics.
+
+## Project navigation
+
+The program is hosted on the gh-pages branch. Main includes working changes at each interrval of development. There is a branch for each "feature" I am working on before merging to main. There will be branched for dice-logic in general, a callback-hell branch, promise branch, and async-await branch.

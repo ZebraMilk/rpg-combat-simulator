@@ -35,7 +35,9 @@ const toHit = (roll, armor) => {
 
 // bring the rollToHit functions into this file to better learn callback Hell
 const rollToHit = () => {
+  // this assignment takes 2000ms, so is undefined for 2s before returning
   const rollTotal = rolls('1d20');
+  // executed before rollTotal is anything
   console.log(rollTotal);
   return rollTotal;
 };
@@ -63,10 +65,10 @@ const clickHandler = (e) => {
     toHit(rollTotal, playerTwo.armorClass[0]);
   } else if (attackType.contains('player-2')) {
     if (attackType.contains('advantage')) {
-      playerTwo.rollToHitAdvantage();
-      return;
+      rollTotal = rollToHitAdvantage();
+    } else {
+      rollTotal = rollToHit();
     }
-    playerTwo.rollToHit();
   } else console.log('something else...');
 };
 // listen to each button?
