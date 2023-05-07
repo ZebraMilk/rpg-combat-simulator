@@ -14,6 +14,7 @@ const rolls = (dice) => {
     console.log('Roll complete!');
     return rollResult();
   }, 2000);
+  return new Promise();
 };
 
 // start a roll
